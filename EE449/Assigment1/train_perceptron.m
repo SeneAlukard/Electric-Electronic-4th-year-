@@ -1,7 +1,7 @@
 function [w, bias] = train_perceptron(data, prediction, bias, eta, max_iter)
 
   if nargin < 5
-    max_iter = 100000;
+    max_iter = 10000;
   end
 
   if nargin < 4

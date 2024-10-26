@@ -15,7 +15,7 @@ function [w, bias] = train_perceptron(data, prediction, bias, eta, max_iter)
   end
 
   data = [bias; data];
-  w = rand(size(data, 1), 1) * 0.01;
+  w = rand(size(data, 1), 1) * 0.01
 
   y = zeros(size(data , 2), 1);
 
@@ -23,13 +23,13 @@ function [w, bias] = train_perceptron(data, prediction, bias, eta, max_iter)
 
   for epoch = 1:max_iter
     for i = 1:4
-      y = w' * data(:,i);
+      y = w' * data(:,i)
 
-      y = double(y > 0);
+      y = double(y > 0)
 
-      e = prediction(i) - y;
+      e = prediction(i) - y
 
-      w = w + eta * e * data(:, i);
+      w = w + eta * e * data(:, i)
 
     end
 
@@ -42,10 +42,9 @@ function [w, bias] = train_perceptron(data, prediction, bias, eta, max_iter)
     m = double(m > 0);
     err = prediction - m; 
     if err == 0
-      epoch
       break;
     end
-  fprintf "hell"
+
   end
 
 end

@@ -51,17 +51,39 @@ unprocessed_data{9}(2:2:6,2:4) = 1;
 unprocessed_data{10} = unprocessed_data{9};
 unprocessed_data{10}(12) = 0;
 
+%imshow, Showing created matrices in a fancy way
 for i = 1:10
   imshow(unprocessed_data{i}, 'InitialMagnification', 'fit');
   pause(0.5)
 end
 
-test = eye(10);
+unprocessed_noisy_data = unprocessed_data;
+
+
+for output_number = 1:10
+  %making noisy_data
+  unprocessed_noisy_data{output_number}(3, 2) = 1;
+  unprocessed_noisy_data{output_number}(4, 3) = 0;
+  unprocessed_noisy_data{output_number}(5, 4) = 0;
+
+  %imshsow, Showing created noisy matrices in a fancy way
+  imshow(unprocessed_noisy_data{output_number}, 'InitialMagnification', 'fit');
+  pause(0.5)
+end
+
+%creating fixed matrix to optimize
+processed_data = zeros(35,10);
 
 processed_data = zeros(35,10);
 for output_number = 1:10
   processed_data(:,output_number) = unprocessed_data{output_number}(:);
 end
+
+for output_number = 1:10
+  processed_noisy_data(:, output_number) = unprocessed_noisy_data{output_number}(:);
+end
+
+test = eye(10);
 
 x = processed_data;
 b = ones(1, 10);
@@ -71,6 +93,14 @@ b = ones(1, 10);
 
 m_test = test_my_network(processed_data, bias, w);
 
+noisy_test = test_my_network(processed_noisy_data, bias, w);
+
+noisy_T = table_test(noisy_test);
+
 T = table_test(m_test);
 
 disp(T);
+
+disp("Noisy Test");
+
+disp(noisy_T);

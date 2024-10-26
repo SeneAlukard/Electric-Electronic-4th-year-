@@ -12,6 +12,6 @@ bias = ones(1, 4);
 
 data = [x1 , x2, x3, x4];
 
-[w, bias] = train_perceptron(data, and, bias);
+[w, bias] = train_perceptron(data, or, bias);
 
 prediction = test(data, bias, w); 
